@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app version="2.5"
+         xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+         http://java.sun.com/xml/ns/j2ee/web-app_2_5.xsd" >
+<!--  http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd -->
+<!--  http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd -->
+  
+  <description>MySQL hmafo</description>
+  
+	<!-- ********** Resources ********** -->
+  <resource-ref>
+      <description>DB Connection</description>
+      <res-ref-name>jdbc/hmafoDS</res-ref-name>
+      <res-type>javax.sql.DataSource</res-type>
+      <res-auth>Container</res-auth>
+  </resource-ref>
+
+	<!-- ********** listeners ********** -->
+  <listener>
+      <description>Update Tasks Status</description>
+      <listener-class>com.astrium.faceo.server.rpc.programming.sps2.UpdateTasksStatusListener</listener-class>
+  </listener>
+
+	<!-- ********** Servlets ********** -->
+
+	<!-- ********** Cartography ********** -->
+
+	<!-- servlet gerant la recuperation des toponymes avec le service Yahoo -->
+	<servlet>
+		<description></description>
+		<servlet-name>getToponymsController</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.cartography.GetToponymsServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>getToponymsController</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getToponymsController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet CartoLayersProxyService retournant les layers de la cartographie -->
+	<servlet>
+		<servlet-name>CartoLayersProxyService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.cartography.CartoLayersProxyServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>CartoLayersProxyService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/cartoLayersProxyController.srv</url-pattern>
+	</servlet-mapping>
+	
+ 	<!-- ********** Programming using SPS 2.0 ********** -->
+ 
+ 	<!-- servlet gerant la recuperation de la liste des ordres SPS 2.0 pour un utilisateur -->
+	<servlet>
+		<servlet-name>GetTasksListController.srv</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetTasksListServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetTasksListController.srv</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getTasksListController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la recuperation du detail d'un ordre SPS 2.0 pour un utilisateur -->
+	<servlet>
+		<servlet-name>GetTaskResultService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetTaskResultServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetTaskResultService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getTaskResultController.srv</url-pattern>
+	</servlet-mapping>
+	
+ 	<!-- servlet gerant la recuperation de la liste des taches SPS 2.0 modifies pour un utilisateur -->
+	<servlet>
+		<servlet-name>GetUpdatedTasksListService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetUpdatedTasksListServiceImpl</servlet-class>
+		<description>Get Updated Tasks from Database</description>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetUpdatedTasksListService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getUpdatedTasksListController.srv</url-pattern>
+	</servlet-mapping>
+ 
+ 	
+ 	<!-- servlet gerant la maj de l'etat des taches SPS 2.0 pour un utilisateur -->
+	<servlet>
+		<servlet-name>UpdateTasksStatusService</servlet-name>
+<!--		<code>com.astrium.faceo.server.rpc.programming.sps2.UpdateTasksStatusService</code>-->
+		<load-on-startup>1</load-on-startup>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.UpdateTasksStatusService</servlet-class>
+		<description>Update Tasks Status in Database</description>
+		<autostart>true</autostart>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>UpdateTasksStatusService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/updateTasksStatusController.srv</url-pattern>
+	</servlet-mapping>
+ 
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'GetFeasibility' -->
+	<servlet>
+		<servlet-name>Sps2GetFeasibilityService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetFeasibilityServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>Sps2GetFeasibilityService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getSps2FeasibilityController.srv</url-pattern>
+	</servlet-mapping>
+ 
+ 	<!-- servlet gerant la suppression d'une tache SPS 2.0 -->
+	<servlet>
+		<servlet-name>DeleteTaskService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.DeleteTaskServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DeleteTaskService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/deleteTaskController.srv</url-pattern>
+	</servlet-mapping>
+ 
+  	<!-- servlet de récupération du statut d'une tache SPS 2.0 -->
+	<servlet>
+		<servlet-name>GetTaskStatusService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetTaskStatusServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetTaskStatusService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getTaskStatusController.srv</url-pattern>
+	</servlet-mapping>
+ 
+  	<!-- servlet de récupération de la description des parametres utilisables pour un capteur -->
+	<servlet>
+		<servlet-name>DescribeTaskingService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.DescribeTaskingServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DescribeTaskingService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getDescribeTaskingController.srv</url-pattern>
+	</servlet-mapping>
+ 
+  	<!-- servlet de récupération de la description d'un capteur -->
+	<servlet>
+		<servlet-name>DescribeSensorService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.DescribeSensorServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DescribeSensorService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getDescribeSensorController.srv</url-pattern>
+	</servlet-mapping>
+ 
+  	<!-- servlet de récupération de la description des services offerts pour un capteur -->
+	<servlet>
+		<servlet-name>GetCapabilitiesService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetCapabilitiesServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetCapabilitiesService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getCapabilitiesServiceController.srv</url-pattern>
+	</servlet-mapping>
+
+  	<!-- servlet de récupération des access aux resultats d'une tache SPS 2.0 -->
+	<servlet>
+		<servlet-name>DescribeResultAccessService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.DescribeResultAccessServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>DescribeResultAccessService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getDescribeResultAccessController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'Submit' -->
+	<servlet>
+		<servlet-name>SubmitService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.SubmitServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>SubmitService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getSubmitController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'Cancel' -->
+	<servlet>
+		<servlet-name>CancelTaskService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.CancelTaskServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>CancelTaskService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getCancelTaskController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'Update' -->
+	<servlet>
+		<servlet-name>UpdateTaskService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.UpdateTaskServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UpdateTaskService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getUpdateTaskController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'Validate' -->
+	<servlet>
+		<servlet-name>ValidateTaskService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.ValidateTaskServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ValidateTaskService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getValidateTaskController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'Reserve' -->
+	<servlet>
+		<servlet-name>ReserveTaskService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.ReserveTaskServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ReserveTaskService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getReserveTaskController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'Confirm' -->
+	<servlet>
+		<servlet-name>ConfirmTaskService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.ConfirmTaskServiceImpl</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>ConfirmTaskService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getConfirmTaskController.srv</url-pattern>
+	</servlet-mapping>
+
+ 	<!-- servlet gerant la soumission de la requete de l'operation SPS 2.0 'GetSensorAvailability' -->
+	<servlet>
+		<servlet-name>GetSensorAvailabilityService</servlet-name>
+		<servlet-class>com.astrium.faceo.server.rpc.programming.sps2.GetSensorAvailabilityServiceImpl</servlet-class>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>GetSensorAvailabilityService</servlet-name>
+		<url-pattern>/www/com.astrium.faceo.HomePage/getSensorAvailabilityController.srv</url-pattern>
+	</servlet-mapping>
+
+  	<!-- End Servlets Descriptors -->
+  
+  	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+		<!-- <welcome-file>www/com.astrium.faceo.HomePage/HomePage.jsp</welcome-file> -->
+  	</welcome-file-list>
+  
+</web-app>

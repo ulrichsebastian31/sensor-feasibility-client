@@ -1,0 +1,931 @@
+<?xml version="1.0"?>
+
+<project name="faceo_hmafo" basedir=".." default="usage">
+	<property file="ant/faceo_hmafo.properties" />
+	<property name="path" value="faceo_hmafo" />
+	<property name="project.name" value="faceo_hmafo" />
+	<property name="core.path" value="faceo_hmafo" />
+	<property name="core.project.name" value="faceo_hmafo" />
+	
+	<property name="livraisonFaceoHmaFo.dir" value="${livraison.dir}/${project.name}" />
+	<property name="corePackage.dir" value="${livraisonFaceoHmaFo.dir}/core" />
+	<property name="programmingPackage.dir" value="${livraisonFaceoHmaFo.dir}/programming" />
+	<property name="livraisonLocalFaceoHmaFo.dir" value="${livraisonFaceoHmaFo.dir}/localhost" />
+	<property name="livraisonProdFaceoHmaFo.dir" value="${livraisonFaceoHmaFo.dir}/production" />
+	<property name="livraisonServerFaceoHmaFo.dir" value="${livraisonFaceoHmaFo.dir}/hmafo-server" />
+
+	<!-- Configure the custom Ant tasks for the Manager application -->
+	<taskdef name="list" classname="org.apache.catalina.ant.ListTask">
+		<classpath>
+			<path location="${appserver.lib}/catalina-ant.jar" />
+		</classpath>
+	</taskdef>
+
+	<!-- Configure the custom Ant tasks for the Manager application -->
+	<!--
+		<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">
+	-->
+	<!--
+		<classpath><path
+		location="${appserver.home}/server/lib/catalina-ant.jar"
+		/></classpath>
+	-->
+	<!-- </taskdef> -->
+	<!--
+		<taskdef name="list" classname="org.apache.catalina.ant.ListTask">
+	-->
+	<!--
+		<classpath><path
+		location="${appserver.home}/server/lib/catalina-ant.jar"
+		/></classpath>
+	-->
+	<!-- 	</taskdef> -->
+
+	<path id="master-classpath">
+		<fileset dir="${libs.dir}">
+			<include name="*.jar" />
+		</fileset>
+		<!-- We need the servlet API classes: -->
+		<!--  * for Tomcat 5/6 use servlet-api.jar -->
+		<!--  * for other app servers - check the docs -->
+		<fileset dir="${appserver.lib}">
+			<include name="servlet*.jar" />
+		</fileset>
+		<pathelement path="${build.dir}" />
+	</path>
+
+	<!-- ============================================================== -->
+	<!-- Tomcat tasks - remove these if you don't have Tomcat installed -->
+	<!-- ============================================================== -->
+	<path id="catalina-ant-classpath">
+		<!-- We need the Catalina jars for Tomcat -->
+		<!--  * for other app servers - check the docs -->
+		<fileset dir="${appserver.lib}">
+			<include name="catalina-ant.jar" />
+		</fileset>
+	</path>
+
+	<taskdef name="install" classname="org.apache.catalina.ant.InstallTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="reload" classname="org.apache.catalina.ant.ReloadTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="list" classname="org.apache.catalina.ant.ListTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="start" classname="org.apache.catalina.ant.StartTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="stop" classname="org.apache.catalina.ant.StopTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="resources" classname="org.apache.catalina.ant.ResourcesTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="roles" classname="org.apache.catalina.ant.RolesTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask">
+		<classpath refid="catalina-ant-classpath" />
+	</taskdef>
+
+	<!-- Ant Targets -->
+	<target name="install" description="Install application in Tomcat">
+		<install url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="/${project.name}" war="${project.name}.war" />
+	</target>
+
+	<target name="reload" description="Reload application in Tomcat">
+		<reload url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="/${project.name}" />
+	</target>
+
+	<target name="start" description="Start Tomcat application">
+		<echo message="Démarrage de Tomcat" />
+		<start url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="/${project.name}" />
+	</target>
+
+	<target name="stop" description="Stop Tomcat application">
+		<echo message="Arrêt de Tomcat" />
+		<stop url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="/${project.name}" />
+	</target>
+
+	<target name="list" description="List Tomcat applications">
+		<list url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" />
+	</target>
+
+	<!-- End Tomcat tasks -->
+
+	<target name="usage">
+		<echo message="" />
+		<echo message="${project.name} build file" />
+		<echo message="-----------------------------------" />
+		<echo message="" />
+		<echo message="Available targets are:" />
+		<echo message="" />
+		<echo message="build     --> Build the application" />
+		<echo message="deploy    --> Deploy application as directory" />
+		<echo message="deploywar --> Deploy application as a WAR file" />
+		<echo message="install   --> Install application in Tomcat" />
+		<echo message="reload    --> Reload application in Tomcat" />
+		<echo message="start     --> Start Tomcat application" />
+		<echo message="stop      --> Stop Tomcat application" />
+		<echo message="list      --> List Tomcat applications" />
+		<echo message="" />
+	</target>
+	
+	<!--
+		********************************************* 
+		Suppression des fichiers java du package 'programming'
+		*********************************************
+	-->
+	<target name="deleteProgrammingFiles">
+		<echo message="--------------------------------------------------" />
+		<echo message="Deleting all java 'programming' files ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Deleting ${client.dir}/bean/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${client.dir}/bean/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${client.dir}/common/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${client.dir}/common/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${client.dir}/events/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${client.dir}/events/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${client.dir}/rpc/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${client.dir}/rpc/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${client.dir}/ui/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${client.dir}/ui/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${client.dir}/ui/configLoaders/ConfLoaderMissionRequestPanels.java ..." />
+		<delete file="${client.dir}/ui/configLoaders/ConfLoaderMissionRequestPanels.java"/>
+		<echo message="Deleting ${client.dir}/ui/cartography/cartoEarth/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${client.dir}/ui/cartography/cartoEarth/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${client.dir}/ui/cartography/cartoEarth/CartoAppletPanel.java ..." />
+		<delete file="${client.dir}/ui/cartography/cartoEarth/CartoAppletPanel.java"/>
+		<echo message="Deleting ${server.dir}/rpc/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${server.dir}/rpc/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${server.dir}/service/programming ..." />
+		<delete includeemptydirs="false">
+			<fileset dir="${server.dir}/service/programming" includes="**/*.java" excludes="**/.svn"/>
+		</delete>
+		<echo message="Deleting ${server.dir}/dataBaseAccess/OrderDB.java ..." />
+		<delete file="${server.dir}/dataBaseAccess/OrderDB.java"/>
+		<echo message="end of deleting java 'programming' files ..." />
+	</target>
+
+	<!--
+		********************************************* 
+		Copie des fichiers de la partie 'core' pour l'application  'FACEO HMA-FO'
+		*********************************************
+	-->
+	<target name="copyCoreFiles" depends="deleteProgrammingFiles">
+		<echo message="--------------------------------------------------" />
+		<echo message="Copying all java files of '${corePackage.dir}' to '${faceo.dir}' ..." />
+		  <copy todir="${faceo.dir}">
+		    <fileset dir="${corePackage.dir}" includes="**/*.java" excludes="**/.svn"/>
+		  </copy>
+	</target>
+
+	<!--
+		********************************************* 
+		Copie des fichiers de la partie 'programming' pour l'application  'FACEO HMA-FO'
+		*********************************************
+	-->
+	<target name="copyProgrammingFiles" depends="deleteProgrammingFiles">
+		<echo message="--------------------------------------------------" />
+		<echo message="Copying all java files of '${programmingPackage.dir}' to '${faceo.dir}' ..." />
+		  <copy todir="${faceo.dir}">
+		    <fileset dir="${programmingPackage.dir}" includes="**/*.java, **/*.properties" excludes="**/.svn"/>
+		  </copy>
+	</target>
+
+	<!--
+		********************************************* 
+		Suppression des fichiers de configuration de l'application faceo_hmafo.properties, web.xml et
+		cartoapplet.jnlp 
+		*********************************************
+	-->
+	<target name="deleteConfigurationFiles">
+		<echo message="--------------------------------------------------" />
+		<echo message="Debut de la suppression tous les fichiers de configuration ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Suppression du fichier ${properties.dir}/faceo_hmafo.properties ..." />
+		<delete file="${properties.dir}/faceo_hmafo.properties" />
+		<echo message="Suppression du fichier ${appletLib.dir}/cartoapplet.jnlp ..." />
+		<delete file="${appletLib.dir}/cartoapplet.jnlp" />
+		<echo message="Suppression du fichier ${appletLib.dir}/gluegen-rt.jnlp ..." />
+		<delete file="${appletLib.dir}/gluegen-rt.jnlp" />
+		<echo message="Suppression du fichier ${appletLib.dir}/jogl.jnlp ..." />
+		<delete file="${appletLib.dir}/jogl.jnlp" />
+		<echo message="Suppression du fichier ${webInf.dir}/web.xml ..." />
+		<delete file="${webInf.dir}/web.xml" />
+		<echo message="Suppression du fichier ${public.dir}/HomePage.html ..." />
+		<delete file="${public.dir}/HomePage.html" />
+		<echo message="Suppression du fichier ${configBean.dir}/ConfigBean.java ..." />
+		<delete file="${configBean.dir}/ConfigBean.java" />
+		<echo message="Suppression du fichier ${constant.dir}/ConfigConstant.java ..." />
+		<delete file="${constant.dir}/ConfigConstant.java" />
+		<echo message="Suppression du fichier ${logosHeader.dir}/logo-faceo.png ..." />
+		<delete file="${logosHeader.dir}/logo-faceo.png" />
+		<echo message="Suppression du fichier ${logosHeader.dir}/logo-eads-astrium.png ..." />
+		<delete file="${logosHeader.dir}/logo-eads-astrium.png" />
+		<echo message="Suppression du fichier ${metaInf.dir}/context.xml ..." />
+		<delete file="${metaInf.dir}/context.xml" />
+		<echo message="fin de la suppression des fichiers de configuration" />
+	</target>
+
+	<!--
+		********************************************* 
+		Suppression des fichiers de configuration de l'application faceo_hmafo.properties, web.xml et
+		cartoapplet.jnlp 
+		*********************************************
+	-->
+	<target name="deleteCartoappletJnlp">
+		<echo message="--------------------------------------------------" />
+		<echo message="Debut de la suppression ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Suppression du fichier ${appletLib.dir}/cartoapplet.jnlp ..." />
+		<delete file="${appletLib.dir}/cartoapplet.jnlp" />
+		<echo message="Suppression du fichier ${appletLib.dir}/gluegen-rt.jnlp ..." />
+		<delete file="${appletLib.dir}/gluegen-rt.jnlp" />
+		<echo message="Suppression du fichier ${appletLib.dir}/jogl.jnlp ..." />
+		<delete file="${appletLib.dir}/jogl.jnlp" />
+		<echo message="fin de la suppression" />
+	</target>
+
+	<!--
+		********************************************* 
+		Copie des fichiers communs de configuration de l'application 'FACEO HMA-FO'
+		*********************************************
+	-->
+	<target name="copyCommonFiles">
+		<echo message="--------------------------------------------------" />
+		<echo
+			message="Copie tous les fichiers communs de configuration de ${livraisonFaceoHmaFo.dir} ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/logo-faceo.png ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/logo-faceo.png" todir="${logosHeader.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/logo-eads-astrium.png ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/logo-eads-astrium.png" todir="${logosHeader.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/ConfigBean.java ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/ConfigBean.java" todir="${configBean.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/context.xml ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/context.xml" todir="${metaInf.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/HomePage.html ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/HomePage.html" todir="${public.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/web.xml ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/web.xml" todir="${webInf.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/cartoapplet.jnlp ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/cartoapplet.jnlp" todir="${appletLib.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/jogl.jnlp ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/jogl.jnlp" todir="${appletLib.dir}/" />
+		<echo message="Copie de ${livraisonFaceoHmaFo.dir}/gluegen-rt.jnlp ..." />
+		<copy file="${livraisonFaceoHmaFo.dir}/gluegen-rt.jnlp" todir="${appletLib.dir}/" />
+		<echo message="--------------------------------------------------" />
+	</target>
+
+	<!--
+		********************************************* 
+		Copie des fichiers de configuration de l'application 'FACEO HMA-FO' pour le serveur accessible depuis internet
+		*********************************************
+	-->
+	<target name="copyServerConfiguration" depends="deleteConfigurationFiles, copyCommonFiles">
+		<echo message="--------------------------------------------------" />
+		<echo
+			message="Copie tous les fichiers de configuration de ${livraisonServerFaceoHmaFo.dir} ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Copie de ${livraisonServerFaceoHmaFo.dir}/faceo_hmafo.properties ..." />
+		<copy file="${livraisonServerFaceoHmaFo.dir}/faceo_hmafo.properties" todir="${properties.dir}/" />
+		<echo message="Copie de ${livraisonServerFaceoHmaFo.dir}/ConfigConstant.java ..." />
+		<copy file="${livraisonServerFaceoHmaFo.dir}/ConfigConstant.java" todir="${constant.dir}/" />
+		<echo message="Copie de ${livraisonServerFaceoHmaFo.dir}/sensors.xml ..." />
+		<copy file="${livraisonServerFaceoHmaFo.dir}/sensors.xml" todir="${resources.dir}/" />
+		<copy file="${livraisonServerFaceoHmaFo.dir}/sensors.xml" todir="${src.resources.dir}/" />
+		<echo message="fin de la copie des fichiers pour l'accés depuis internet" />
+	</target>
+
+	<!--
+		********************************************* 
+		Copie des fichiers de configuration de l'application 'FACEO HMA-FO' pour la production
+		*********************************************
+	-->
+	<target name="copyProductionConfiguration" depends="deleteConfigurationFiles, copyCommonFiles">
+		<echo message="--------------------------------------------------" />
+		<echo
+			message="Copie tous les fichiers de configuration de ${livraisonProdFaceoHmaFo.dir} ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Copie de ${livraisonProdFaceoHmaFo.dir}/faceo_hmafo.properties ..." />
+		<copy file="${livraisonProdFaceoHmaFo.dir}/faceo_hmafo.properties" todir="${properties.dir}/" />
+		<echo message="Copie de ${livraisonProdFaceoHmaFo.dir}/ConfigConstant.java ..." />
+		<copy file="${livraisonProdFaceoHmaFo.dir}/ConfigConstant.java" todir="${constant.dir}/" />
+		<echo message="Copie de ${livraisonProdFaceoHmaFo.dir}/sensors.xml ..." />
+		<copy file="${livraisonProdFaceoHmaFo.dir}/sensors.xml" todir="${resources.dir}/" />
+		<copy file="${livraisonProdFaceoHmaFo.dir}/sensors.xml" todir="${src.resources.dir}/" />
+		<echo message="fin de la copie des fichiers pour la production" />
+	</target>
+
+	<!--
+		********************************************* Copie des fichiers de
+		configuration de l'application 'FACEO HMA-FO' en local'
+		*********************************************
+	-->
+	<target name="copyLocalConfiguration" depends="deleteConfigurationFiles, copyCommonFiles">
+		<echo message="--------------------------------------------------" />
+		<echo
+			message="Copie tous les fichiers de configuration de ${livraisonLocalFaceoHmaFo.dir} ..." />
+		<echo message="--------------------------------------------------" />
+		<echo message="Copie de ${livraisonLocalFaceoHmaFo.dir}/faceo_hmafo.properties ..." />
+		<copy file="${livraisonLocalFaceoHmaFo.dir}/faceo_hmafo.properties" todir="${properties.dir}/" />
+		<echo message="Copie de ${livraisonLocalFaceoHmaFo.dir}/ConfigConstant.java ..." />
+		<copy file="${livraisonLocalFaceoHmaFo.dir}/ConfigConstant.java" todir="${constant.dir}/" />
+		<echo message="Copie de ${livraisonLocalFaceoHmaFo.dir}/sensors.xml ..." />
+		<copy file="${livraisonLocalFaceoHmaFo.dir}/sensors.xml" todir="${resources.dir}/" />
+		<copy file="${livraisonLocalFaceoHmaFo.dir}/sensors.xml" todir="${src.resources.dir}/" />
+		<echo message="fin de la copie des fichiers pour localhost" />
+	</target>
+
+	<path id="project.class.path">
+		<pathelement location="war/WEB-INF/classes" />
+		<pathelement location="${GWT.home}/gwt-user.jar" />
+		<fileset dir="${GWT.home}" includes="gwt-dev*.jar" />
+		<!-- Add any additional non-server libs (such as JUnit) -->
+		<fileset dir="web/WEB-INF/lib" includes="**/*.jar" />
+	</path>
+
+	<!--
+		********************************************* 
+		Compilation des sources java de l'application 
+		*********************************************
+	-->
+	<target name="build" description="Compile main source tree java files">
+		<echo message="Create repertory ${build.dir}" />
+		<mkdir dir="${build.dir}" />
+		<echo message="Début de la compilation des sources java" />
+		<javac destdir="${build.dir}" source="1.5" target="1.5" debug="true"
+			deprecation="false" optimize="false" failonerror="true">
+			<src path="${src.dir}" />
+			<classpath refid="master-classpath" />
+			<classpath refid="project.class.path" />
+		</javac>
+		<echo message="End creating java sources's compilation" />
+	</target>
+
+	<!--
+		********************************************* 
+		Création du fichier 'war' de l'application 
+		*********************************************
+	-->
+	<!--
+	<target name="createFaceoHmaFoWar" depends="build">
+		<echo message="Suppression du fichier ${project.name}.war" />
+		<delete file="${war.dir}/${project.name}.war" />
+		<echo message="Construction de ${project.name}.war" />
+		<war basedir="${webroot.dir}" warfile="${war.dir}/${project.name}.war"
+			webxml="${war.dir}/WEB-INF/web.xml" filesonly="true" update="true"
+			includes="**/**/**.**" 
+			excludes="**/*.java,conf/*.*,**/modules/*.*,**/services/*.*,**/tomcat/*.*,**/src/${faceoPublic.dir}/*.*">
+		</war>
+		<echo message="fichier ${project.name}.war généré" />
+	</target>
+ 	-->
+	
+	<!--
+		********************************************* 
+		Création du fichier 'war' de l'application 
+		*********************************************
+	-->
+	<target name="createFaceoWar" depends="build">
+		<echo message="Deleting file '${project.name}.war'" />
+		<delete file="${war.dir}/${project.name}.war" />
+		<echo message="Deletes all files and subdirectories of build '${warWeb.dir}'" />
+		<delete dir="${warWeb.dir}"/>
+		<echo message="Copy des fichiers de properties" />
+		<copy todir="${warClasses.dir}/properties">
+			<fileset dir="${src.dir}/properties">
+				<include name="*.properties" />
+			</fileset>
+		</copy>
+		<echo message="Copying classes" />
+		<copy todir="${warWebInf.dir}/classes">
+			<fileset dir="${webInf.dir}/classes">
+				<include name="**/*.class" />
+				<exclude name="**/*.java" />
+			</fileset>
+		</copy>
+		<echo message="Copying properties files" />
+		<copy todir="${warClasses.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.properties" />
+				<exclude name="**/*.java" />
+				<exclude name="**/faceo.properties" />
+			</fileset>
+		</copy>
+		<echo message="Copying libraries directories" />
+		<copy todir="${warLib.dir}">
+			 <!-- <fileset dir="${axis2-1.4.1.dir}"/> -->
+		    <fileset dir="${axis2-1.5.1.dir}"/>
+		    <fileset dir="${commons_utils.dir}"/>
+		    <fileset dir="${gwt.dir}"/>
+		    <fileset dir="${gwtext.dir}"/>
+			 <fileset dir="${javascript.dir}"/>
+			 <fileset dir="${jdom.dir}"/>
+			 <fileset dir="${json.dir}"/>
+		    <fileset dir="${logs.dir}"/>
+		    <fileset dir="${saxon9b.dir}"/>
+		    <fileset dir="${sps2.dir}"/>
+		    <fileset dir="${utils.dir}"/>
+		    <fileset dir="${webServices.dir}"/>
+		    <fileset dir="${widgets.dir}"/>
+			 <fileset dir="${xml.dir}"/>
+			 <fileset dir="${xml_binding.dir}"/>
+			 <!-- <fileset dir="${xmlbeans-2.4.0.dir}"/> -->
+		    <fileset dir="${xmlbeans-2.5.0.dir}"/>
+			<!-- <fileset dir="${spring-3.0.4.dir}"/> -->
+		</copy>
+		<echo message="Copying web client application" />
+		<copy todir="${warWebWWW.dir}/">
+		    <fileset dir="${www.dir}" includes="**/**.**" excludes=".gwt-tmp/**.**"/>
+		</copy>
+		<echo message="Copying ${warMetaInf.dir}/context.xml ..." />
+		<copy file="${metaInf.dir}/context.xml" todir="${warMetaInf.dir}/" />
+		<echo message="Copying web.xml" />
+		<copy file="${webInf.dir}/web.xml" todir="${warWebInf.dir}/" />
+		<echo message="Copying index.jsp" />
+		<copy file="${warWebHome.dir}/index.jsp" todir="${warWeb.dir}/" />
+		<echo message="Deleting 'classes/public' repertory" />
+		<delete dir="${warClasses.dir}/com/astrium/faceo/public" />
+		<echo message="Building ${project.name}.war" />
+		<war basedir="${war.dir}/web" warfile="${war.dir}/${project.name}.war"
+			webxml="${webInf.dir}/web.xml" filesonly="true" update="true"
+			includes="**/**/**.**" 
+			excludes="**/src/${faceoPublic.dir}/*.*">
+		</war>
+		<echo message="file ${project.name}.war created" />
+	</target>
+	
+	<!--
+		********************************************* 
+		Suppression de l'application Faceo HMA-FO avec Tomcat
+		*********************************************
+	-->
+	<target name="undeployFaceoHmaFo" description="Remove web application">
+		<echo message="Début de la suppression de l'application ${project.name}" />
+		<undeploy url="${tomcat.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="${path}" />
+		<echo message="Fin de la suppression de l'application ${project.name}" />
+	</target>
+
+	<!--
+		********************************************* 
+		Déploiement de l'application avec Tomcat
+		*********************************************
+	-->
+
+	<!--
+		********************************************* 
+		librairies
+		*********************************************
+	-->
+	<target name="libs" description="Copy libs to WEB-INF/lib">
+		<mkdir dir="war/WEB-INF/lib" />
+		<copy todir="war/WEB-INF/lib" file="${GWT.home}/gwt-user.jar" />
+		<copy todir="war/WEB-INF/lib" file="${GWT.home}/gwt-dev.jar" />
+		<!-- Add any additional server libs that need to be copied -->
+
+		<!-- External libraries -->
+		<copy todir="war/WEB-INF/lib" file="${gwtext.dir}/gwtext.jar" />
+		<copy todir="war/WEB-INF/lib" file="${gwtext.dir}/gwtextux.jar" />
+		<copy todir="war/WEB-INF/lib" file="${gwt.dir}/gwt-servlet.jar" />
+		<copy todir="war/WEB-INF/lib" file="${widgets.dir}/gwt-widgets-0.2.0.jar" />
+		<copy todir="war/WEB-INF/lib" file="${logs.dir}/log4j-1.2.15.jar" />
+	</target>
+
+	<!--
+		********************************************* 
+		Compilation de la partie GWT de l'application 
+		*********************************************
+	-->
+
+	<target name="GWTCompile">
+		<echo message="Starting GWT compilation of ${faceo.dir}/HomePage.gwt.xml" />
+		<java fork="true" maxmemory="512M" classname="com.google.gwt.dev.Compiler">
+			<classpath>
+				<pathelement path="${src.dir}"></pathelement>
+				<pathelement location="${GWT.home}/gwt-user.jar"></pathelement>
+				<pathelement location="${GWT.home}/gwt-dev.jar"></pathelement>
+
+				<!-- External libraries -->
+				<pathelement location="${gwtext.dir}/gwtext.jar" />
+				<pathelement location="${gwtext.dir}/gwtextux.jar" />
+				<pathelement location="${gwt.dir}/gwt-servlet.jar" />
+				<pathelement location="${widgets.dir}/gwt-widgets-0.2.0.jar" />
+				<pathelement location="${logs.dir}/log4j-1.2.15.jar" />
+
+				<pathelement location="${faceo.dir}/HomePage.gwt.xml" />
+			</classpath>
+			<!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
+			<jvmarg value="-Xss16M" />
+			<jvmarg value="-Xmx512M" />
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<!--
+				Additional arguments like -localWorkers (2) : to use 2 processors
+				(Dual Core)
+			-->
+			<!--  -noserver      Prevents the embedded web server from running -->
+			<!--
+				-port Specifies the TCP port for the embedded web server (defaults
+				to 8888)
+			-->
+			<!--
+				-whitelist Allows the user to browse URLs that match the specified
+				regexes (comma or space separated)
+			-->
+			<!--
+				-blacklist Prevents the user browsing URLs that match the specified
+				regexes (comma or space separated)
+			-->
+			<!--
+				-logLevel The level of logging detail: ERROR, WARN, INFO, TRACE,
+				DEBUG, SPAM, or ALL
+			-->
+			<!--
+				-gen The directory into which generated files will be written for
+				review
+			-->
+			<!--
+				-style Script output style: OBF[USCATED], PRETTY, or DETAILED
+				(defaults to OBF)
+			-->
+			<!--
+				-ea Debugging: causes the compiled output to check assert
+				statements.
+			-->
+			<!--
+				-server Specifies a different embedded web server to run (must
+				implement ServletContainerLauncher)
+			-->
+			<!--  -startupUrl    Automatically launches the specified URL -->
+			<!--
+				-war The war directory to write output files into (defaults to war)
+			-->
+			<!--
+				-extra The directory into which extra, non-deployed files will be
+				written
+			-->
+			<!--
+				-workDir The compiler work directory (must be writeable; defaults to
+				a system temp dir)
+			-->
+			<!--
+				-localWorkers Specifies the number of local workers to use when
+				compiling permutations
+			-->
+			<arg value="-gen" />
+			<arg value="war/www" />
+			<arg value="com.astrium.faceo.HomePage" />
+			<arg value="-war" />
+			<arg value="war/www" />
+			<arg value="-style" />
+			<arg value="OBFUSCATED" />
+			<arg value="-localWorkers" />
+			<arg value="2" />
+		</java>
+		<echo message="GWT Compilation finished" />
+	</target>
+
+	<target name="package" depends="GWTCompile" description="Package up the project as a jar">
+		<jar destfile="faceo.jar">
+			<fileset dir="bin">
+				<include name="**/*.class" />
+			</fileset>
+			<!-- Get everything; source, modules, html files -->
+			<fileset dir="src">
+				<include name="**" />
+			</fileset>
+			<fileset dir="test">
+				<include name="**" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="GWTClean">
+		<!-- Delete the bin directory tree -->
+		<delete file="faceo.jar" />
+		<delete>
+			<fileset dir="bin" includes="**/*.class" />
+		</delete>
+	</target>
+
+	<target name="all" depends="package" />
+
+	<!--
+		********************************************* 
+		Shell de la partie GWT de l'application 
+		*********************************************
+	-->
+
+	<target name="deleteDeploymentRepertory">
+		<!-- Delete the deployment directory tree -->
+		<echo
+			message="Suppression du répertoire ${project.name} dans le répertoire ${deploy.path}" />
+		<delete includeemptydirs="true">
+			<fileset dir="${deploy.path}/${project.name}" includes="**/*" />
+		</delete>
+	</target>
+
+	<!--
+		***************************************************************************
+		Suppression de l'application sur le serveur LINUX FACEO avec Tomcat
+		***************************************************************************
+	-->
+	<target name="undeployFaceoHmaFoServer" description="Remove web application">
+		<echo
+			message="Début de la suppression de l'application ${project.name} sur le serveur Linux" />
+		<undeploy url="${tomcatFACEOServer.manager.url}" username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="${path}" />
+		<echo
+			message="Fin de la suppression de l'application ${project.name} sur le serveur Linux" />
+		<!--
+			<echo message="Début de l'arrêt de Tomcat sur le serveur Linux"/>
+			<stop url="${tomcat.manager.url}"
+			username="${tomcatFACEOServer.manager.url}"
+			password="${tomcat.manager.password}" path="/${project.name}"/> <echo
+			message="Fin de l'arrêt de Tomcat sur le serveur Linux"/>
+		-->
+	</target>
+
+	<!--
+		********************************************* 
+		Déploiement du fichier 'war' de l'application 
+		*********************************************
+	-->
+	<!--
+		<target name="deployWarFACEOServer" description="Deploy application as
+		a WAR file"> <echo message="Debut du deploiement{project.name}.war
+		avec le fichier ${war.dir}${path}.war sur le serveur Linux"/> <deploy
+		url="${tomcatFACEOServer.manager.url}"
+		username="${tomcat.manager.username}"
+		password="${tomcat.manager.password}" path="${path}"
+		localWar="file:${war.dir}${path}.war}" /> <echo message="Fin du
+		deploiement de ${project.name}.war sur le serveur Linux"/> </target>
+	-->
+
+	<!--
+		********************************************* 
+		Déploiement du fichier 'war' de l'application 
+		*********************************************
+	-->
+	<!--
+		<target name="deploySitgWar" depends="GWTCompile, build, createWar,
+		stop, deleteDeploymentRepertory, start" description="Deploy
+		application as a WAR file">
+	-->
+	<target name="deployFaceoHmaFoWar" depends="createFaceoWar"
+		description="Deploy application as a WAR file">
+		<echo
+			message="Création de ${project.name}.war avec le fichier ${web.dir}/WEB-INF/web.xml" />
+		<!--
+			<war destfile="${project.name}.war"
+			webxml="${web.dir}/WEB-INF/web.xml"> <fileset dir="${web.dir}">
+			<include name="**/*.*"/> <exclude name="*.java" /> </fileset> </war>
+		-->
+		<echo
+			message="Suppression de ${project.name}.war dans le répertoire ${deploy.path}" />
+		<delete file="${deploy.path}/${project.name}.war" />
+		<echo message="Copie de ${project.name}.war dans le répertoire ${deploy.path}" />
+		<!--
+			<deploy url="${tomcat.manager.url}"
+			username="${tomcat.manager.username}"
+			password="${tomcat.manager.password}" path="${path}"
+			localWar="file:${war.dir}${path}.war}" />
+		-->
+		<copy todir="${deploy.path}" preservelastmodified="true">
+			<fileset dir="./${war.dir}">
+				<include name="${project.name}.war" />
+			</fileset>
+		</copy>
+		<echo message="deploy end" />
+	</target>
+
+	<!--
+		********************************************* Signature des jar pour
+		l'applet *********************************************
+	-->
+	<target name="signjars" description="Sign all the jar for deployment">
+		<echo
+			message="Début de la signature des jars de ${toSignedjar.dir} vers ${signedjar.dir}" />
+		<signjar destDir="${signedjar.dir}" alias="faceo" storepass="astrium"
+			preservelastmodified="true">
+			<path>
+				<fileset dir="${toSignedjar.dir}" includes="**/*.jar" />
+			</path>
+			<flattenmapper />
+		</signjar>
+		<echo
+			message="Fin de la signature des jars de ${toSignedjar.dir} vers ${signedjar.dir}" />
+	</target>
+
+	<!--
+		********************************************* Copie de cartoApplet.jar
+		dans le repertoire des librairies de l'applet
+		*********************************************
+	-->
+	<target name="copySignedCartoApplet" description="Copy all Sign jar to applet repertory">
+		<echo
+			message="Début de la copie cartoAppletSITG.jar de ${signedjar.dir} vers ${appletLib.dir}" />
+		<copyfile src="${signedjar.dir}/appletCartoSITG.jar" dest="${appletLib.dir}/appletCartoSITG.jar"
+			forceoverwrite="true">
+		</copyfile>
+		<echo
+			message="Fin de la copie cartoAppletSITG.jar de ${signedjar.dir} vers ${appletLib.dir}" />
+	</target>
+
+	<!--
+		********************************************* Copie des jar pour
+		l'applet dans le repertoire des librairies de l'applet
+		*********************************************
+	-->
+	<target name="copySignedJarsToApplet" description="Copy all Sign jar to applet repertory">
+		<echo
+			message="Début de la copie des jars signés de ${signedjar.dir} vers ${appletLib.dir}" />
+		<copy toDir="${appletLib.dir}" overwrite="true">
+			<path>
+				<fileset dir="${signedjar.dir}" includes="**/*.jar" />
+			</path>
+		</copy>
+		<echo
+			message="Fin de la copie des jars signés de ${signedjar.dir} vers ${appletLib.dir}" />
+	</target>
+
+	<property name="test.dir" value="test" />
+
+	<target name="buildtests" description="Compile test tree java files">
+		<mkdir dir="${build.dir}" />
+		<javac destdir="${build.dir}" source="1.5" target="1.5" debug="true"
+			deprecation="false" optimize="false" failonerror="true">
+			<src path="${test.dir}" />
+			<classpath refid="master-classpath" />
+		</javac>
+	</target>
+
+	<target name="tests" depends="build, buildtests" description="Run tests">
+		<junit printsummary="on" fork="false" haltonfailure="false"
+			failureproperty="tests.failed" showoutput="true">
+			<classpath refid="master-classpath" />
+			<formatter type="brief" usefile="false" />
+
+			<batchtest>
+				<fileset dir="${build.dir}">
+					<include name="**/*Tests.*" />
+				</fileset>
+			</batchtest>
+
+		</junit>
+
+		<fail if="tests.failed">
+			tests.failed=${tests.failed}
+			***********************************************************
+			***********************************************************
+			**** One or more tests failed! Check the output ... ****
+			***********************************************************
+			***********************************************************
+		</fail>
+	</target>
+
+	<target name="clean" description="Clean output directories">
+		<delete>
+			<fileset dir="${build.dir}">
+				<include name="**/*.class" />
+			</fileset>
+		</delete>
+	</target>
+
+	<path id="project.class.path">
+		<pathelement location="${build.dir}" />
+		<pathelement location="${GWT.home}/gwt-user.jar" />
+		<fileset dir="${GWT.home}" includes="gwt-dev*.jar" />
+		<!-- Add any additional non-server libs (such as JUnit) -->
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+
+	<target name="hosted">
+		<echo
+			message="Début du lancement du Hosted Mode GWT de ${faceo.dir}/HomePage.gwt.xml" />
+		<java failonerror="true" fork="true" maxmemory="512M"
+			classname="com.google.gwt.dev.HostedMode">
+			<classpath>
+				<pathelement path="${src.dir}"></pathelement>
+				<pathelement location="${GWT.home}/gwt-user.jar"></pathelement>
+				<pathelement location="${GWT.home}/gwt-dev-windows_old.jar"></pathelement>
+
+				<!-- External libraries -->
+				<pathelement location="${lib.dir}/gwtext.jar" />
+				<pathelement location="${lib.dir}/gwtextux.jar" />
+				<pathelement location="${lib.dir}/gwt-servlet.jar" />
+				<pathelement location="${lib.dir}/gwt-sl.jar" />
+				<pathelement location="${lib.dir}/gwt-widgets-0.2.0.jar" />
+				<pathelement location="${lib.dir}/gwt-google-apis.jar" />
+				<pathelement location="${lib.dir}/log4j-1.2.15.jar" />
+				<pathelement location="${lib.dir}/spring.jar" />
+				<pathelement location="${lib.dir}/openlayers_gwt-0.4.jar" />
+
+				<pathelement location="${faceo.dir}/HomePage.gwt.xml" />
+			</classpath>
+			<!-- add jvmarg -Xss16M or similar if you see a StackOverflowError -->
+			<jvmarg value="-Xss16M" />
+			<jvmarg value="-Xmx512M" />
+			<!-- Additional arguments like -style PRETTY or -logLevel DEBUG -->
+			<!--
+				Additional arguments like -localWorkers (2) : to use 2 processors
+				(Dual Core)
+			-->
+			<!--  -noserver      Prevents the embedded web server from running -->
+			<!--
+				-port Specifies the TCP port for the embedded web server (defaults
+				to 8888)
+			-->
+			<!--
+				-whitelist Allows the user to browse URLs that match the specified
+				regexes (comma or space separated)
+			-->
+			<!--
+				-blacklist Prevents the user browsing URLs that match the specified
+				regexes (comma or space separated)
+			-->
+			<!--
+				-logLevel The level of logging detail: ERROR, WARN, INFO, TRACE,
+				DEBUG, SPAM, or ALL
+			-->
+			<!--
+				-gen The directory into which generated files will be written for
+				review
+			-->
+			<!--
+				-style Script output style: OBF[USCATED], PRETTY, or DETAILED
+				(defaults to OBF)
+			-->
+			<!--
+				-ea Debugging: causes the compiled output to check assert
+				statements.
+			-->
+			<!--
+				-server Specifies a different embedded web server to run (must
+				implement ServletContainerLauncher)
+			-->
+			<!--  -startupUrl    Automatically launches the specified URL -->
+			<!--
+				-war The war directory to write output files into (defaults to war)
+			-->
+			<!--
+				-extra The directory into which extra, non-deployed files will be
+				written
+			-->
+			<!--
+				-workDir The compiler work directory (must be writeable; defaults to
+				a system temp dir)
+			-->
+			<!--
+				-localWorkers Specifies the number of local workers to use when
+				compiling permutations
+			-->
+			<arg value="-gen" />
+			<arg value="web/www" />
+			<arg value="com.astrium.faceo.HomePage" />
+			<arg value="-war" />
+			<arg value="web/www" />
+			<arg value="-style" />
+			<arg value="OBFUSCATED" />
+			<arg value="-localWorkers" />
+			<arg value="2" />
+		</java>
+		<echo
+			message="Lancement Hosted Mode GWT terminé pour ${faceo.dir}/HomePage.gwt.xml" />
+	</target>
+
+</project>

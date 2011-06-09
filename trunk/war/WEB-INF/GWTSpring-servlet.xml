@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="urlMapping"
+		class="org.gwtwidgets.server.spring.GWTHandler">
+<!--		class="org.gwtwidgets.server.spring.GWTHandler">-->
+		<property name="mappings">
+			<map>
+				<entry key="/www/com.astrium.faceo.HomePage/getCancelTaskController.rpc" value-ref="rpc.CancelTask" />
+				<entry key="/www/com.astrium.faceo.HomePage/getConfirmTaskController.rpc" value-ref="rpc.ConfirmTask" />
+				<entry key="/www/com.astrium.faceo.HomePage/deleteTaskController.rpc" value-ref="rpc.TasksDAO" />
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="facadeProgramming1" class="com.astrium.faceo.server.service.programming.sps2.FacadeTaskRequests">
+	</bean>
+   <bean id="response1" class="com.astrium.faceo.client.bean.programming.sps2.cancel.CancelResponseBean">
+	</bean>
+	
+   <bean id="confirmResponse1" class="com.astrium.faceo.client.bean.programming.sps2.confirm.ConfirmResponseBean">
+	</bean>
+
+	<bean id="facadeTasks1" class="com.astrium.faceo.server.service.programming.sps2.FacadeTasks">
+	</bean>
+	<bean id="error1" class="com.astrium.faceo.client.bean.programming.sps2.ErrorBean">
+	</bean>
+
+
+	<bean id="rpc.CancelTask" class="com.astrium.faceo.server.rpc.programming.sps2.CancelTaskServiceImpl">
+		<property name="facadeProgramming" ref="facadeProgramming1" />
+		<property name="response" ref="response1" />
+	</bean>
+	<bean id="rpc.ConfirmTask" class="com.astrium.faceo.server.rpc.programming.sps2.ConfirmTaskServiceImpl">
+		<property name="facadeTaskConfirm" ref="facadeProgramming1" />
+		<property name="confirmResponse" ref="confirmResponse1" />
+	</bean>
+	<bean id="rpc.TasksDAO" class="com.astrium.faceo.server.rpc.programming.sps2.DeleteTaskServiceImpl">
+      <property name="facadeTasks" ref="facadeTasks1" />
+		<property name="errorBean" ref="error1" />
+	</bean> 
+
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp href="cartoapplet.jnlp">
+    <information>
+        <title>FACEO World Wind Java applet</title>
+        <vendor>ASTRIUM</vendor>
+        <homepage href="http://www.astrium.eads.net/"/>
+        <description>FACEO World Wind Java applet</description>
+        <description kind="short">FACEO World Wind Java applet</description>
+        <offline-allowed/>
+    </information>
+    <security>
+        <all-permissions/>
+    </security>
+
+    <resources>
+        <j2se href="http://java.sun.com/products/autodl/j2se" version="1.6.0_10+" initial-heap-size="128m"
+              max-heap-size="512m"/>
+        <property name="sun.java2d.noddraw" value="true"/>
+        <jar href="appletCarto.jar" main="true"/>
+        <jar href="worldwind.jar" main="false"></jar>
+        <jar href="json_simple.jar" main="false"></jar>
+        <jar href="commons-codec-1.3.jar" main="false"></jar>
+        <!-- <extension name="jogl" href="http://download.java.net/media/jogl/builds/archive/jsr-231-webstart-current/jogl.jnlp"/> -->
+        <extension name="jogl" href="jogl.jnlp"/>
+    </resources>
+	<applet-desc 
+         name="Cartography Applet"
+         main-class="com.eads.astrium.faceo.carto.applet.WWJApplet"
+         width="500"
+         height="500">
+		<param name="MAYSCRIPT" value="true"></param>
+      <!-- Center the image in the applet's area -->
+      <param name="centerimage" value="true"></param>
+      <!-- Turn off the box border for better blending with the surrounding web page -->
+      <param name="boxborder" value="false"></param>
+      <!-- Image while loading -->
+      <param name="image" value="appletWaitingMessage.jpg"></param>
+      <!-- Text while loading -->
+      <param name="boxmessage" value="loading..."></param>        
+       <!-- separate JVM -->
+      <param name="separate_jvm" value="true" />
+	</applet-desc>
+</jnlp>

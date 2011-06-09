@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jasper.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/jsp-api.jar"/>
+	<classpathentry kind="var" path="TOMCAT_HOME/lib/servlet-api.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/COMMON_UTILS_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JAVASCRIPT_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JDOM_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/JSON_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/LOGS_HMAFO"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/UTILS_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/WEB_SERVICES_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/WIDGETS_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/XML_BINDING_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/ANT_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/GWT_Ext_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/GWT_HMAFO"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.USER_LIBRARY/SPS2_HMAFO"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/SAXON9_HMAFO"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/AXIS2_1_5_1_HMAFO"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/XMLBEANS_2_5_0_HMAFO"/>
+	<classpathentry kind="output" path="war/WEB-INF/classes"/>
+</classpath>

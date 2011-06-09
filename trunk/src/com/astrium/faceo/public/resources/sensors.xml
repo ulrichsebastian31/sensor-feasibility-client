@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sensors>
+	<!--DEIMOS (SPS 2.0) urn (SOAP) for sensor OPT-1-->
+	<sensor id="OPT1" active="true" synchronous="false" type="optical" describeFile="/resources/describeTaskingResponses/DescribeTaskingResponse_OPT1.xml">
+		<urn>urn:ogc:object:feature:Sensor:deimos-space:HMA:OPT-1</urn>
+		<endpoint>http://dione.deimos-space.com/HMA-FO_2_9/services/HMA-SPS</endpoint>
+		<getCapabilitiesUrl>http://dione.deimos-space.com/HMA-FO_2_9/GetCapabilitiesServlet?service=SPS&amp;request=GetCapabilities</getCapabilitiesUrl>
+	</sensor>
+	<!--DEIMOS (SPS 2.0) urn (SOAP) for sensor OPT-2-->
+	<sensor id="OPT2" active="true" synchronous="true" type="optical" describeFile="/resources/describeTaskingResponses/DescribeTaskingResponse_OPT2.xml">
+		<urn>urn:ogc:object:feature:Sensor:deimos-space:HMA:OPT-2</urn>
+		<endpoint>http://dione.deimos-space.com/HMA-FO_2_9/services/HMA-SPS</endpoint>
+		<getCapabilitiesUrl>http://dione.deimos-space.com/HMA-FO_2_9/GetCapabilitiesServlet?service=SPS&amp;request=GetCapabilities</getCapabilitiesUrl>
+	</sensor>
+	<!--DEIMOS (SPS 2.0) urn (SOAP) for sensor SAR-1-->
+	<sensor id="SAR1" active="true" synchronous="false" type="radar" describeFile="/resources/describeTaskingResponses/DescribeTaskingResponse_SAR1.xml">
+		<urn>urn:ogc:object:feature:Sensor:deimos-space:HMA:SAR-1</urn>
+		<endpoint>http://dione.deimos-space.com/HMA-FO_2_9/services/HMA-SPS</endpoint>
+		<getCapabilitiesUrl>http://dione.deimos-space.com/HMA-FO_2_9/GetCapabilitiesServlet?service=SPS&amp;request=GetCapabilities</getCapabilitiesUrl>
+	</sensor>
+	<!--DEIMOS (SPS 2.0) urn (SOAP) for sensor SAR-2-->
+	<sensor id="SAR2" active="true" synchronous="true" type="radar" describeFile="/resources/describeTaskingResponses/DescribeTaskingResponse_SAR2.xml">
+		<urn>urn:ogc:object:feature:Sensor:deimos-space:HMA:SAR-2</urn>
+		<endpoint>http://dione.deimos-space.com/HMA-FO_2_9/services/HMA-SPS</endpoint>
+		<getCapabilitiesUrl>http://dione.deimos-space.com/HMA-FO_2_9/GetCapabilitiesServlet?service=SPS&amp;request=GetCapabilities</getCapabilitiesUrl>
+	</sensor>
+	<!--SPOT Image urn (SOAP) for sensor SPOT5:HRG-->
+	<sensor id="SPOT" active="true" synchronous="true" type="optical" describeFile="/resources/describeTaskingResponses/DescribeTaskingResponse_SPOT5.xml">
+		<urn>urn:spot:sensors:SPOT5:HRG</urn>
+		<endpoint>http://ws.spotimage.com/axis2/services/SPS_v2.0.4</endpoint>
+		<getCapabilitiesUrl>http://ws.spotimage.com/axis2/services/SPS_v2.0.4?service=SPS&amp;request=GetCapabilities&amp;version=2.0.0</getCapabilitiesUrl>
+	</sensor>
+</sensors>

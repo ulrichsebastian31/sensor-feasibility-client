@@ -1,0 +1,33 @@
+
+
+pour déployer une nouvelle version :
+
+1. supprimer la version courante :
+
+	utiliser le manager de tomcat pour supprimer la version
+
+2. arrêter Tomcat
+	à partir d'une console (putty)
+	se connecter (grouquette/astrium)
+	utiliser le compte root
+		su -
+	se positionner dans le répertoire 'init.d' :
+		cd /etc/init.d/
+	arrêter Tomcat
+		./tomcat6 stop
+	vérifier que Tomcat est arrêté
+		ps -eaf
+		si Tomcat est toujours actif (jsvc.exec -home /usr/java/jdk1.6.0_20 -Dcatalina.home=/var/lib/t)
+		alors tuer les 2 process correspondant
+	puis vider le répertoire 'webapps/ROOT' : /var/lib/tomcat6/webapps/ROOT
+		cd /var/lib/tomcat6/webapps
+		rm -rf ROOT
+	puis vider le répertoire 'works' : /var/lib/tomcat6/work/Catalina
+		cd /var/lib/tomcat6/work/Catalina/localhost
+		rm -rf _
+		rm -rf faceo_hmafo
+	déposer le nouveau war dans le répertoire '/var/lib/tomcat6/webapps'
+	redémarrer Tomcat
+		cd /etc/init.d/
+		./tomcat6 start
+

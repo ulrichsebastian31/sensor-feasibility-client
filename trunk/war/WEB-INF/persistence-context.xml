@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd">
+
+	<bean id="baseDao" abstract="true" class="com.gla.quoiou.core.dao.AbstractDao">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+    
+    <bean id="evenementsDao" class="com.gla.quoiou.persistence.impl.EvenementsDaoImpl"  parent="baseDao">
+    </bean>
+    
+    <bean id="abonnesDao" class="com.gla.quoiou.persistence.impl.AbonnesDaoImpl"  parent="baseDao">
+    </bean>
+    
+    <bean id="communesDao" class="com.gla.quoiou.persistence.impl.CommunesDaoImpl"  parent="baseDao">
+    </bean>
+    
+</beans>
