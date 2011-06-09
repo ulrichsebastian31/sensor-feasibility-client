@@ -1,0 +1,10 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context 
+	docBase="faceo_hmafo" 
+	path="/faceo_hmafo" reloadable="true" 
+	source="org.eclipse.jst.j2ee.server:faceo_hmafo"> 
+	<ResourceLink global="jdbc/hmafoDS" name="jdbc/hmafoDS" type="javax.sql.Datasource"/>
+   <session-config>
+   	<session-timeout>60</session-timeout>
+   </session-config>
+</Context>

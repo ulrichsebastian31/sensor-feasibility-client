@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<module>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name="com.google.gwt.user.User"/>
+
+	<!-- Inherit internationalization support. -->
+	<inherits name="com.google.gwt.i18n.I18N"/>
+
+	<!-- Inherit the GWTExt Toolkit library configuration. -->
+	<inherits name="com.gwtext.GwtExt"/>
+	
+	<inherits name="com.google.gwt.user.UserAgent" />
+
+	<!-- Inherit the GWTExt Extensions Toolkit library configuration. -->
+	<inherits name="com.gwtextux.GwtExtUx" />
+	
+	<inherits name="com.google.gwt.json.JSON"/> 
+	<inherits name="com.google.gwt.http.HTTP"/>
+	<inherits name="com.google.gwt.xml.XML"/>
+
+	<inherits name="com.google.gwt.core.Core"/>
+	
+	<!-- Inherit the GWT Widgets library -->
+	<inherits name="org.gwtwidgets.WidgetLibrary"/>
+
+	<!-- <set-property name="user.agent" value="ie6, ie8, gecko, gecko1_8, safari"/> -->
+	<set-property name="user.agent" value="ie6, ie8, gecko, gecko1_8, safari"/>
+	<set-property name="locale" value="default"/>
+
+ 	<!-- French language, independent of country -->
+<!--  	<extend-property name="locale" values="fr"/ -->
+
+  	<!-- French in France -->
+<!--  	<extend-property name="locale" values="fr_FR"/> -->
+  
+  	<!-- English language, independent of country -->
+<!--  	<extend-property name="locale" values="en"/> -->
+
+	<replace-with class="com.google.gwt.user.client.impl.DOMImplSafari">
+		<when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
+		<when-property-is name="user.agent" value="safari"/>
+	</replace-with>
+	
+	<replace-with class="com.google.gwt.user.client.impl.DOMImplSafari">
+		<when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
+		<when-property-is name="user.agent" value="AppleWebKit"/>
+	</replace-with>
+
+	<replace-with class="com.google.gwt.user.client.impl.DOMImplIE6">                    
+		<when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>  
+		<when-property-is name="user.agent" value="ie6"/>  
+	</replace-with>
+   
+	<replace-with class="com.google.gwt.user.client.impl.DOMImplIE8">      
+		<when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/> 
+		<when-property-is name="user.agent" value="ie8"/> 
+   </replace-with> 
+   
+	<replace-with class="com.google.gwt.user.client.impl.DOMImplMozilla">                        
+		<when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>  
+		<when-property-is name="user.agent" value="gecko1_8"/>  
+	</replace-with>
+
+	<replace-with class="com.google.gwt.user.client.impl.DOMImplMozillaOld">             
+		<when-type-is class="com.google.gwt.user.client.impl.DOMImpl"/>
+		<when-property-is name="user.agent" value="gecko"/>
+	</replace-with>
+
+	<!-- Specify the app entry point class. -->
+	<entry-point class="com.astrium.faceo.client.ui.HomePage"/>
+	
+	<!-- ********** Servlets ********** -->
+	<!-- utils -->
+	<servlet class="com.astrium.faceo.server.rpc.utils.GetIPServiceImpl" path="/getIPController.srv"/>
+	<!-- cartography -->
+	<servlet class="com.astrium.faceo.server.rpc.cartography.CartoLayersProxyServiceImpl" path="/cartoLayersProxyController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.cartography.GetToponymsServiceImpl" path="/getToponymsController.srv"/>
+	<!-- programming -->
+	<servlet class="com.astrium.faceo.server.rpc.programming.GetOrderListServiceImpl" path="/getOrderListController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.GetOrderResultServiceImpl" path="/getOrderResultController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.GetFeasibilitySpsServiceImpl" path="/getFeasibilitySpsController.srv"/>	
+	<!-- programming SPS 2.0 -->
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.GetTasksListServiceImpl" path="/getTasksListController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.GetTaskResultServiceImpl" path="/getTaskResultController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.UpdateTasksListServiceImpl" path="/updateTasksListController.srv"/>
+<!--	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.UpdateTasksStatusService" path="/updateTasksStatusController.srv"/>-->
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.GetFeasibilityServiceImpl" path="/getSps2FeasibilityController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.DeleteTaskServiceImpl" path="/deleteTaskController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.GetTaskStatusServiceImpl" path="/getTaskStatusController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.DescribeTaskingServiceImpl" path="/getDescribeTaskingController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.DescribeSensorServiceImpl" path="/getDescribeSensorController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.GetCapabilitiesServiceImpl" path="/getCapabilitiesServiceController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.DescribeResultAccessServiceImpl" path="/getDescribeResultAccessController.srv"/>
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.SubmitServiceImpl" path="/getSubmitController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.CancelTaskServiceImpl" path="/getCancelTaskController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.UpdateTaskServiceImpl" path="/getUpdateTaskController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.ReserveTaskServiceImpl" path="/getReserveTaskController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.ConfirmTaskServiceImpl" path="/getConfirmTaskController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.GetSensorAvailabilityServiceImpl" path="/getSensorAvailabilityController.srv"/>	
+	<servlet class="com.astrium.faceo.server.rpc.programming.sps2.ValidateTaskServiceImpl" path="/getValidateTaskController.srv"/>	
+	
+	<!--	appletWW.js a laisser sinon nne fonctionne pas sous IE -->
+	<script src="javascript/appletWW.js"/>
+	<!-- Properties -->
+	<!-- <define-property name="faceo_client" values="faceo"/> -->
+
+</module>

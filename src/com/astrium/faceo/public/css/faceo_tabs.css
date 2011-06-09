@@ -1,0 +1,362 @@
+/*
+ * Ext JS Library 2.0.2
+ * Copyright(c) 2006-2008, Ext JS, LLC.
+ * licensing@extjs.com
+ * 
+ * http://extjs.com/license
+ */
+
+.faceo-x-tab-panel {
+    overflow:hidden;
+}
+
+.faceo-x-tab-panel-header, .faceo-x-tab-panel-footer {
+	background: #deecfd;
+	border: 1px solid #8db2e3;
+    overflow:hidden;
+    zoom:1;
+}
+
+.faceo-x-tab-panel-header {
+	border: 1px solid #8db2e3;
+	padding-bottom: 2px;
+}
+
+.faceo-x-tab-panel-footer {
+	border: 1px solid #8db2e3;
+	padding-top: 2px;
+}
+
+.faceo-x-tab-strip-wrap {
+	width:100%;
+    overflow:hidden;
+    position:relative;
+    zoom:1;
+}
+
+ul.faceo-x-tab-strip {
+	display:block;
+    width:5000px;
+    zoom:1;
+}
+
+ul.faceo-x-tab-strip-top {
+	padding-top: 1px;
+	background: url(../images/default/tabs/tab-strip-bg.gif) #AAFBAA repeat-x bottom;
+	border-bottom: 1px solid #8db2e3;
+}
+
+ul.faceo-x-tab-strip-bottom {
+	padding-bottom: 1px;
+	background: url(../images/default/tabs/tab-strip-btm-bg.gif) #AAFBAA repeat-x top;
+	border-top: 1px solid #8db2e3;
+	border-bottom: 0 none;
+}
+
+.faceo-x-tab-panel-header-plain .faceo-x-tab-strip-top {
+    background:transparent !important;
+    padding-top:0 !important;
+}
+
+.faceo-x-tab-panel-header-plain {
+    background:transparent !important;
+    border-width:0 !important;
+    padding-bottom:0 !important;
+}
+
+.faceo-x-tab-panel-header-plain .faceo-x-tab-strip-spacer {
+    border:1px solid #8db2e3;
+    border-top: 0 none;
+    height:2px;
+    background: #deecfd;
+    font-size:1px;
+    line-height:1px;
+}
+
+.ext-border-box .faceo-x-tab-panel-header-plain .faceo-x-tab-strip-spacer {
+    height:3px;
+}
+
+ul.faceo-x-tab-strip li {
+    float:left;
+    margin-left:2px;
+}
+
+ul.faceo-x-tab-strip li.faceo-x-tab-edge {
+    float:left;
+    margin:0 !important;
+    padding:0 !important;
+    border:0 none !important;
+    font-size:1px !important;
+    line-height:1px !important;
+    overflow:hidden;
+    zoom:1;
+    background:transparent !important;
+    width:1px;
+}
+
+.faceo-x-tab-strip a, .faceo-x-tab-strip span, .faceo-x-tab-strip em {
+	display:block;
+}
+
+.faceo-x-tab-strip a {
+	text-decoration:none !important;
+	-moz-outline: none;
+	outline: none;
+	cursor:pointer;
+}
+
+.faceo-x-tab-strip-inner {
+    overflow:hidden;
+	text-overflow: ellipsis;
+}
+
+.faceo-x-tab-strip span.faceo-x-tab-strip-text {
+	font:normal 11px tahoma,arial,helvetica;
+	color:#416aa3;
+	white-space: nowrap;
+	cursor:pointer;
+    padding:4px 0;
+}
+.faceo-x-tab-strip .faceo-x-tab-with-icon .faceo-x-tab-right {
+    padding-left:6px;
+}
+.faceo-x-tab-strip .faceo-x-tab-with-icon span.faceo-x-tab-strip-text {
+	padding-left:20px;
+    background-position: 0 3px;
+    background-repeat: no-repeat;
+}
+
+.faceo-x-tab-strip-over span.faceo-x-tab-strip-text {
+	color:#15428b;
+}
+
+.faceo-x-tab-strip-active {
+    cursor:default;
+}
+
+.faceo-x-tab-strip-active span.faceo-x-tab-strip-text {
+	cursor:default;
+	color:#15428b;
+    font-weight:bold;
+}
+
+.faceo-x-tab-strip-disabled .faceo-x-tabs-text {
+	cursor:default;
+	color:#aaaaaa;
+}
+
+.faceo-x-tab-panel-body {
+    overflow:hidden;
+}
+.faceo-x-tab-panel-bwrap {
+    overflow:hidden;
+}
+.ext-ie .faceo-x-tab-strip .faceo-x-tab-right {
+    position:relative;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-active .faceo-x-tab-right {
+    margin-bottom:-1px;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-active .faceo-x-tab-right span.faceo-x-tab-strip-text {
+    padding-bottom:5px;
+}
+
+.faceo-x-tab-strip-bottom .faceo-x-tab-strip-active .faceo-x-tab-right {
+    margin-top:-1px;
+}
+.faceo-x-tab-strip-bottom .faceo-x-tab-strip-active .faceo-x-tab-right span.faceo-x-tab-strip-text {
+    padding-top:5px;
+}
+
+
+.faceo-x-tab-strip-top .faceo-x-tab-right {
+	background: transparent url(../images/default/tabs/tabs-sprite.gif) no-repeat 0 -51px;
+    padding-left:10px;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-left {
+	background: transparent url(../images/default/tabs/tabs-sprite.gif) no-repeat right -351px;
+    padding-right:10px;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-inner {
+	background: transparent url(../images/default/tabs/tabs-sprite.gif) repeat-x 0 -201px;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-over .faceo-x-tab-right {
+	 background-position:0 -101px;
+}
+.faceo-x-tab-strip-top .faceo-x-tab-strip-over .faceo-x-tab-left {
+	 background-position:right -401px;
+}
+.faceo-x-tab-strip-top .faceo-x-tab-strip-over .faceo-x-tab-strip-inner {
+	 background-position:0 -251px;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-active .faceo-x-tab-right {
+	background-position: 0 0;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-active .faceo-x-tab-left {
+	background-position: right -301px;
+}
+
+.faceo-x-tab-strip-top .faceo-x-tab-strip-active .faceo-x-tab-strip-inner {
+	background-position: 0 -151px;
+}
+
+.faceo-x-tab-strip-bottom .faceo-x-tab-right {
+	background: url(../images/default/tabs/tab-btm-inactive-right-bg.gif) no-repeat bottom right;
+}
+
+.faceo-x-tab-strip-bottom .faceo-x-tab-left {
+	background: url(../images/default/tabs/tab-btm-inactive-left-bg.gif) no-repeat bottom left;
+}
+
+.faceo-x-tab-strip-bottom .faceo-x-tab-strip-active .faceo-x-tab-right {
+	background: url(../images/default/tabs/tab-btm-right-bg.gif) no-repeat bottom left;
+}
+
+.faceo-x-tab-strip-bottom .faceo-x-tab-strip-active .faceo-x-tab-left {
+	background: url(../images/default/tabs/tab-btm-left-bg.gif) no-repeat bottom right;
+}
+.faceo-x-tab-strip-bottom .faceo-x-tab-left {
+    padding:0 10px;
+}
+.faceo-x-tab-strip-bottom .faceo-x-tab-right {
+    padding:0;
+}
+.faceo-x-tab-strip .faceo-x-tab-strip-close {
+    display:none;
+}
+.faceo-x-tab-strip-closable {
+    position:relative;
+}
+
+.faceo-x-tab-strip-closable .faceo-x-tab-left {
+    padding-right:19px;
+}
+
+.faceo-x-tab-strip .faceo-x-tab-strip-closable a.faceo-x-tab-strip-close {
+	background-image:url(../images/default/tabs/tab-close.gif);
+    opacity:.6;
+    -moz-opacity:.6;
+    background-repeat:no-repeat;
+    display:block;
+	width:11px;height:11px;
+    position:absolute;
+    top:3px;
+    right:3px;
+    cursor:pointer;
+    z-index:2;
+}
+
+.faceo-x-tab-strip .faceo-x-tab-strip-active a.faceo-x-tab-strip-close {
+    opacity:.8;
+    -moz-opacity:.8;
+}
+.faceo-x-tab-strip .faceo-x-tab-strip-closable a.faceo-x-tab-strip-close:hover{
+	background-image:url(../images/default/tabs/tab-close.gif);
+    opacity:1;
+    -moz-opacity:1;
+}
+
+.faceo-x-tab-panel-body {
+    border: 1px solid #8db2e3;
+    background:#fff;
+}
+.faceo-x-tab-panel-body-top {
+    border-top: 0 none;
+}
+.faceo-x-tab-panel-body-bottom {
+    border-bottom: 0 none;
+}
+
+.faceo-x-tab-scroller-left {
+    background: transparent url(../images/default/tabs/scroll-left.gif) no-repeat -18px 0;
+    border-bottom: 1px solid #8db2e3;
+    width:18px;
+    position:absolute;
+    left:0;
+    top:0;
+    z-index:10;
+    cursor:pointer;
+}
+.faceo-x-tab-scroller-left-over {
+    background-position: 0 0;
+}
+.faceo-x-tab-scroller-left-disabled {
+    background-position: -18px 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}
+.faceo-x-tab-scroller-right {
+    background: transparent url(../images/default/tabs/scroll-right.gif) no-repeat 0 0;
+    border-bottom: 1px solid #8db2e3;
+    width:18px;
+    position:absolute;
+    right:0;
+    top:0;
+    z-index:10;
+    cursor:pointer;
+}
+.faceo-x-tab-scroller-right-over {
+    background-position: -18px 0;
+}
+.faceo-x-tab-scroller-right-disabled {
+    background-position: 0 0;
+    opacity:.5;
+    -moz-opacity:.5;
+    filter:alpha(opacity=50);
+    cursor:default;
+}
+
+.faceo-x-tab-scrolling .faceo-x-tab-strip-wrap {
+    margin-left:18px;
+    margin-right:18px;
+}
+
+.faceo-x-tab-scrolling {
+    position:relative;    
+}
+
+.faceo-x-tab-panel-bbar .faceo-x-toolbar {
+    border:1px solid #99bbe8;
+    border-top:0 none;
+    overflow:hidden;
+    padding:2px;
+}
+
+.faceo-x-tab-panel-tbar .faceo-x-toolbar {
+    border:1px solid #99bbe8;
+    border-top:0 none;
+    overflow:hidden;
+    padding:2px;
+}
+
+.faceo-x-border-layout-ct .faceo-x-tab-panel {
+	background: white;
+}
+
+.faceo_info_button {
+	font-family: tahoma,arial,helvetica,sans-serif;
+	font-size: 12px;
+	vertical-align: middle;
+}
+
+.faceo_checkBox {
+	font-family: tahoma,arial,helvetica,sans-serif;
+	font-size: 12px;
+	vertical-align: bottom;
+}
+
+.faceo_centered_image {
+	text-align: center;
+	display: block;
+	vertical-align: top;
+}

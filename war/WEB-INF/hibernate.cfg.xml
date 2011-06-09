@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration
+    PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+
+    <session-factory>
+		<property name="hibernate.current_session_context_class">
+			org.springframework.orm.hibernate3.SpringSessionContext
+		</property>
+		<property name="hibernate.dialect">
+			org.hibernate.dialect.Oracle10gDialect
+		</property>		
+		<property name="hibernate.show_sql">
+			true
+		</property>		
+        <!-- mapping files -->
+        <mapping resource="com/gla/quoiou/service/persistence/Evenements.hbm.xml"/>
+        <mapping resource="com/gla/quoiou/service/persistence/Abonnes.hbm.xml"/>
+        <mapping resource="com/gla/quoiou/service/persistence/Communes.hbm.xml"/>
+
+		<!-- Start of user code of listeners -->
+		<!-- End of user code of listeners -->
+
+    </session-factory>
+
+	<!-- Start of user code of security parameters -->
+	<!-- End of user code of security parameters -->
+
+</hibernate-configuration>
